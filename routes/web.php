@@ -24,9 +24,9 @@ Route::get('peidas', function () {
     return view('peidas');
 });
 
-/*Route::get('register', function () {
+Route::get('register', function () {
     return view('register');
-});*/
+});
 
 Route::get('clear', function() {
    Artisan::call('route:cache');

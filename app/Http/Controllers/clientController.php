@@ -34,7 +34,7 @@ class clientController extends Controller
         if (Hash::check($data["password"], $user->password)){
             $user= Auth::user();
             dd($user);
-//            return view('welcome')->with($data);
+            return view('welcome')->with($data);
         }
         else{
             return back()->withError('Password errada')->withInput();
@@ -64,9 +64,9 @@ class clientController extends Controller
         ]);
         $data["password"] = Hash::make($data["password"]);
 
-        return view('welcome')->with("data" ,$data);
+//        return view('welcome')->with("data" ,$data);
 
-//        return \response()->json(client::create($data));
+        return \response()->json(client::create($data));
     }
 
     /**
