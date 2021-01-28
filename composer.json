@@ -18,7 +18,9 @@
         "nyholm/psr7": "^1.3",
         "slim/slim": "3.8",
         "twilio/sdk": "^6.14",
-        "vonage/client": "^2.4"
+        "vonage/client": "^2.4",
+      "ext-http": "*",
+      "ext-curl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateSendedsmsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('sendedsms', function (Blueprint $table) {
             $table->id();
-            $table->string('email','191')->unique();
-            $table->string('phone_number');
-            $table->string('username');
-            $table->string('password');
-            $table->boolean('Admin')->default('0');
-            $table->rememberToken();
             $table->timestamps();
+            $table->string('Body');
+            $table->string('To');
+            $table->foreignId('phone_id')->references('id')->on('ournumbers');
+            $table->foreignId('user_id')->references('id')->on('users');
         });
     }
 
@@ -32,6 +30,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('sendedsms');
     }
 }

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\ournumbers;
+use App\Models\sendedsms;
 use App\Models\sms;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class SmsController extends Controller
@@ -67,7 +70,19 @@ class SmsController extends Controller
 
         sms::create($save);
 
-     }
+    }
+    public function showrecived(Request $request)
+    {
+        $all_sms= sms::paginate(5);
+
+
+        return view('ffssms')->with('teste', $all_sms );
+    }
+    public function showsended(Request $request)
+    {
+        $all_sms= sendedsms::paginate(5);
+        return view('allsended')->with('teste', $all_sms );
+    }
 
 
 
@@ -79,7 +94,76 @@ class SmsController extends Controller
      */
     public function show(sms $id)
     {
-        return \response()->json([$id]);
+
+    return view('contrato')->with('dados', $id);
+
+    }
+
+    public function Send(Request $request){
+
+//        dd($request['To']);
+        $data=$request->validate([
+           'phone'   =>'required',
+           'message'=>'required'
+        ]);
+        $regex='/^9[12356]\d{6}[0-9]$/';
+        $teste = preg_match_all($regex,$data['phone']);
+        if ($teste){
+        $data['phone']="+351".$data['phone'];
+
+//        dd($data['To']);
+        $fs="".ournumbers::first()->id;
+        $ls="".ournumbers::latest()->first()->id;
+
+
+        $ls= (int)$ls;
+        $fs= (int)$fs;
+        $um=random_int($fs,$ls);
+//        dd($um);
+        $tt=ournumbers::where('id',$um)->firstorfail();
+        $number=$tt->phone_number;
+
+
+//        dd("done");
+        $data['sender_name']= $number;
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.dexatel.com/v1/send/sms/quick',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>$data,
+            CURLOPT_HTTPHEADER => array(
+                'token: 15f59fac65d805dddb4d4b9d95285d2f',
+            ),
+        ));
+
+        $o = curl_exec($curl);
+
+        curl_close($curl);
+            $resultado=json_decode($o);
+//            dd($resultado);
+        if($resultado->statusName !== "OK"){
+            $derp["0"]=$resultado->statusName;
+            $derp["1"]=$resultado->message;
+            return view('SendSms')->with('erros',$derp);
+           }
+
+            $smsinsert['phone_id']=$tt->id;
+            $smsinsert['user_id']=Auth::user()->id;
+            $smsinsert['Body']=$data["message"];
+            $smsinsert['To']=$data['phone'];
+
+            sendedsms::create($smsinsert);
+
+        return redirect('/sendSMS')->with('suc','Done');
+        }
+        return redirect('/sendSMS')->with('err','Número de telefone Errado');
     }
 
     /**

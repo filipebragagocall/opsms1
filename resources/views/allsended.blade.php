@@ -1,7 +1,15 @@
 {{--@foreach ($teste as $testes)--}}
 {{--    {{$testes['id']}}<br>--}}
 {{--@endforeach--}}
+<?php
 
+if (isset($a)){
+    $b=$a+5;
+}else{
+    $a=0;
+    $b=5;
+}
+?>
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
@@ -9,8 +17,8 @@
     window.onload = function java (){
         myFunction();
     }
-        function myFunction() {
-        setInterval(function(){ location.replace("/recivedsms"); }, 20000);
+    function myFunction() {
+        setInterval(function(){ location.replace("/enviadas"); }, 20000);
     }
 </script>
 @if (!Auth::guest())
@@ -27,9 +35,6 @@
                             <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Mensagens  de
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Para
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -38,7 +43,7 @@
                                 <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider flex items-end">
                                     <a href="/recivedsms" class="text-right w-full">
                                         <svg class="w-6 mt-2 outline-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                         </svg>
                                     </a>
                                 </th>
@@ -48,33 +53,24 @@
                             @if (count($teste) === 0)
                                 <tr>
 
-                                    <td class="px-6 py-4 whitespace-nowrap text-center" colspan="4">
-                                        <b>Não tem Menssagens.</b>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center" colspan="3">
+                                        <b>Não tem Menssagens enviadas.</b>
                                     </td>
                                 </tr>
                             @endif
                             @foreach($teste as $testes)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    <b>{{$testes->From}}</b>
-                                                </div>
 
-                                            </div>
-                                        </div>
-                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900"> <b>{{$testes->To}}</b></div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <b>{{$testes->From}}</b>
+                                        <b>{{$testes->Body}}</b>
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="sms/{{$testes->id}}" class="text-indigo-600 hover:text-indigo-900">ver</a>
-                                    </td>
+                                   <td>
+
+                                   </td>
                                 </tr>
                             @endforeach
 
@@ -88,11 +84,11 @@
                             </tbody>
                         </table>
 
-                            </div>
-
-                        </div>
-
                     </div>
+
+                </div>
+
+                </div>
 
                 </div>
             </section>
