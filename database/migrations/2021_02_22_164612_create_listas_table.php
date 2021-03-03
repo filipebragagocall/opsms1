@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSendedsmsTable extends Migration
+class CreateListasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateSendedsmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sendedsms', function (Blueprint $table) {
+        Schema::create('listas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('Body');
-            $table->string('To');
-            $table->string("Rand");
-            $table->foreignId('phone_id')->references('id')->on('ournumbers');
+            $table->string('name');
+            $table->string('numbers');
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 
@@ -31,6 +29,6 @@ class CreateSendedsmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sendedsms');
+        Schema::dropIfExists('listas');
     }
 }

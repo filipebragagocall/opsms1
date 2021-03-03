@@ -49,7 +49,76 @@
                                 </tr>
                                 </tbody>
                             </table></div>
+                        @if(auth()->user()->Admin)
+                        <div class="w-full h-24 min-h-0 min-w-0 rounded-2xl mt-8"> <table class=" rounded-2xl min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="rounded-lg rounded-b-none px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <b>Informação:</b>
+                                    </th>
 
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-100">
+                                <tr>
+                                    <td class="px-6 py-4  bg-yellow-200 rounded-lg rounded-t-none">
+                                        <div class="flex items-center">
+                                            <div class="w-full">
+                                                <div class="text-sm font-medium text-gray-900 w-full">
+                                                    {{--                                                    <b>{{$dados['id']}}</b>--}}
+                                                    <div class=" relative text-gray-600 w-full">
+                                                        <p >
+                                                            Esta página serve para enviar as menssagens de contrato.
+                                                            Para âmbito do mesmo tem de ser associado um número de telefone que deve ser adicionado e confirmado em :
+                                                            <a href="/addphone" class="underline font-bold">Adicionar telefones</a>
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table></div>
+                        @else
+                            <div class="w-full h-24 min-h-0 min-w-0 rounded-2xl mt-8"> <table class=" rounded-2xl min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="rounded-lg rounded-b-none px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <b>Informação:</b>
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-100">
+                                    <tr>
+                                        <td class="px-6 py-4  bg-yellow-200 rounded-lg rounded-t-none">
+                                            <div class="flex items-center">
+                                                <div class="w-full">
+                                                    <div class="text-sm font-medium text-gray-900 w-full">
+                                                        {{--                                                    <b>{{$dados['id']}}</b>--}}
+                                                        <div class=" relative text-gray-600 w-full">
+                                                            <p >
+                                                                Esta página serve para enviar as menssagens de contrato.<br>
+                                                                Caso seja apresentado o erro:<br>
+                                                                <b>Não têm nenhum telefone adicionado.</b><br>
+                                                                Então deverá contactar alguem suprior.
+
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    </tbody>
+                                </table></div>
+                                @endif
 
 
                     </div>

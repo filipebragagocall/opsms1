@@ -19,6 +19,7 @@ class CreateSmsTable extends Migration
             $table->string("Body");
             $table->string("From");
             $table->string("To");
+            $table->string("Contrato")->default('0');
             $table->string('smsid' , 100)->unique();
         });
     }

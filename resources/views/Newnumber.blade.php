@@ -52,7 +52,7 @@
                                                         <div class="w-1/3">
                                                             <div class="ml-3 text-sm font-medium text-gray-900 w-full">
                                                                 <div class= "relative text-gray-600 w-full">
-                                                                    @include('Countrycode.countrycode')
+                                                                    @include('Select.countrycode')
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -95,8 +95,7 @@
                                                     @endif
                                                     <div class="p-8">
                                                         <button type="submit" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                                            <i class="fa fa-paper-plane mr-2"></i>
-                                                            <span>Enviar</span>
+                                                            <span> Adicionar </span><i class=" ml-3 fad fa-phone-plus fill-current"></i>
                                                         </button>
                                                     </div>
                                                 </td>

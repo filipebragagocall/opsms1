@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\listas;
 use App\Models\ournumbers;
 use App\Models\sendedsms;
+use App\Models\sentlist;
 use App\Models\sms;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Stmt\Break_;
 
 class SmsController extends Controller
 {
@@ -21,6 +24,10 @@ class SmsController extends Controller
     public function index()
     {
         //
+    }
+    public function status(Request $request){
+        Log::debug(var_export($request->input(),true));
+
     }
 
     /**
@@ -60,6 +67,7 @@ class SmsController extends Controller
         $save["From"] = "+" .$data ["msisdn"];
         $save["Body"] = $data ["text"];
         $save["smsid"] = $data["messageId"];
+//        dd($save);
         /*
          Twilio
         $save["To"] = $data ["To"];
@@ -68,19 +76,58 @@ class SmsController extends Controller
         $save["smsid"] = $data["SmsMessageSid"];
          */
 
-        sms::create($save);
+        $check =  ournumbers::where('phone_number', $save['To'])->first();
+//        dd($check);
 
+        if ($check) {
+            $sms = sendedsms::where([
+                ['phone_id', '=', $check->id],
+                ['To', '=',  $save['From']],
+            ])->first();
+
+//            dd($sms);
+            $rand = $sms->Rand;
+//            dd("$rand");
+            $regex='/\s'.$rand.'$/';
+
+            $no = preg_match_all($regex,$data['text']);
+
+            if ($no) {
+                $save["Contrato"]=1;
+//                dd("1");
+                $save["sent_id"]=$sms->id;
+            } else {
+                $save["Contrato"]=0;
+//                dd("0");
+                $save["sent_id"]='no';
+            }
+//            dd($check->id);
+
+            sms::create($save);
+        }else
+//            dd("omfg");
+            sms::create($save);
     }
     public function showrecived(Request $request)
     {
-        $all_sms= sms::paginate(5);
-
-
+        $all_sms = sms::paginate(5);
         return view('ffssms')->with('teste', $all_sms );
     }
+
+
+
     public function showsended(Request $request)
     {
-        $all_sms= sendedsms::paginate(5);
+
+        if (!Auth::user()->Admin) {
+
+            $all_sms = sendedsms::whereHas("user", function ($query) {
+                return $query->where("id", auth()->user()->id);
+            })->paginate(5);
+        } else
+        {
+            $all_sms = sendedsms::paginate(5);
+    }
         return view('allsended')->with('teste', $all_sms );
     }
 
@@ -95,6 +142,10 @@ class SmsController extends Controller
     public function show(sms $id)
     {
 
+//    dd($id["sent_id"]);
+    $info  = sendedsms::where('id', $id["sent_id"])->first();
+    $id->info = $info;
+//    dd($id->info->id);
     return view('contrato')->with('dados', $id);
 
     }
@@ -112,9 +163,16 @@ class SmsController extends Controller
         $data['phone']="+351".$data['phone'];
 
 //        dd($data['To']);
-        $fs="".ournumbers::first()->id;
-        $ls="".ournumbers::latest()->first()->id;
 
+              $check = ournumbers::first();
+            if ($check){
+                $fs="".ournumbers::first()->id;
+                $ls="".ournumbers::latest()->first()->id;
+            }else{
+                $derp[0] = 'Não têm nenhum telefone adicionado';
+
+                return view('SendSms')->with('erros',$derp);
+            }
 
         $ls= (int)$ls;
         $fs= (int)$fs;
@@ -122,10 +180,13 @@ class SmsController extends Controller
 //        dd($um);
         $tt=ournumbers::where('id',$um)->firstorfail();
         $number=$tt->phone_number;
-
+        $ti= rand(1000,9999);
+        $smsinsert['Body']=$data["message"];
+        $data['message'] = $data['message'] ."\r\n". 'SIM ' . $ti;
 
 //        dd("done");
         $data['sender_name']= $number;
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -156,47 +217,15 @@ class SmsController extends Controller
 
             $smsinsert['phone_id']=$tt->id;
             $smsinsert['user_id']=Auth::user()->id;
-            $smsinsert['Body']=$data["message"];
             $smsinsert['To']=$data['phone'];
-
+            $smsinsert['Rand'] = $ti;
             sendedsms::create($smsinsert);
 
         return redirect('/sendSMS')->with('suc','Done');
+
         }
         return redirect('/sendSMS')->with('err','Número de telefone Errado');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\sms  $sms
-     * @return Response
-     */
-    public function edit(sms $sms)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\sms  $sms
-     * @return Response
-     */
-    public function update(Request $request, sms $sms)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\sms  $sms
-     * @return Response
-     */
-    public function destroy(sms $sms)
-    {
-        //
-    }
 }

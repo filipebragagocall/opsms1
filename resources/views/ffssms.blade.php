@@ -35,9 +35,9 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Corpo
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider flex items-end">
-                                    <a href="/recivedsms" class="text-right w-full">
-                                        <svg class="w-6 mt-2 outline-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 uppercase tracking-wider flex items-end ">
+                                    <a href="/recivedsms" class="text-center w-full">
+                                            <svg class="w-6 mt-2 outline-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                         </svg>
                                     </a>
@@ -69,11 +69,11 @@
                                         <div class="text-sm text-gray-900"> <b>{{$testes->To}}</b></div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <b>{{$testes->From}}</b>
+                                        <b>{{$testes->Body}}</b>
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="sms/{{$testes->id}}" class="text-indigo-600 hover:text-indigo-900">ver</a>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                        <a href="sms/{{$testes->id}}" class="text-indigo-600 hover:text-indigo-900 ">ver</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -12,8 +12,10 @@ class sms extends Model
     protected $fillable = [
         'From',
         'To',
+        'Contrato',
         'Body',
         'smsid',
+        'sent_id'
     ];
 
 }

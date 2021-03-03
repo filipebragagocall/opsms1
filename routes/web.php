@@ -25,11 +25,13 @@ Route::get('/', function () {
 
         return redirect("/peidas");
 
-    }else{
+    }elseif(auth()->user()->username !== "Briefing" && auth()->user()->email !=="Briefing@gocall.pt" ){
     $sms= \App\Models\sendedsms::where('user_id',Auth::user()->id)->get()->last();
     return view('welcome')->with('userinfo',$sms);
-
-    }   });
+    }else{
+        return redirect('/Briefing');
+    }
+});
     Route::get('peidas', function () {
     return view('peidas');
 });
@@ -45,6 +47,9 @@ Route::get('register', function () {
 Route::get('clear', function() {
    Artisan::call('route:cache');
    return view ("welcome");
+});
+Route::get('teste', function() {
+   return view ("teste");
 });
 // Sair do perfil do utilizador
 Route::get('logout','\App\Http\Controllers\clientController@logout');
@@ -67,20 +72,74 @@ Route::get('enviadas', '\App\Http\Controllers\SmsController@showsended');
 Route::get('addphone', function (){
     return view('Newnumber');
 });
+Route::get('briefing', function (){
+    return view('dni');
+});
+Route::get('lista', function (){
+    return view('list');
+});
+
+Route::get('sendlist', function (){
+    if (Auth::user()->Admin ){
+        $list = \App\Models\listas::all();
+    }else{
+        $t=Auth::user()->id;
+        $list = \App\Models\listas::where('user_id',$t)->get();
+    }
+    return view('listsend')->with('lista',$list);
+});
+
+
+//Route::get('editlist', function (){
+//    if (Auth::user()->Admin ){
+//        $list = \App\Models\listas::all();
+//    }else{
+//        $t=Auth::user()->id;
+//        $list = \App\Models\listas::where('user_id',$t)->get();
+//    }
+//    return view('editlist')->with('lista',$list);
+//});
+
+Route::get('editlist','\App\Http\Controllers\ListaController@listshow');
+
+
+Route::get('editlist/{id}','\App\Http\Controllers\ListaController@listedit');
+
+Route::get('deletelist/{id}','\App\Http\Controllers\ListaController@deletelist');
+
+Route::post('editlist/{id}','\App\Http\Controllers\ListaController@listeditid');
+
+Route::get('settings', function (){
+    return view('definicoes');
+});
+
+
+
+Route::get('Briefing', function (){
+    return view('dni');
+});
 //Página para enviar SMS
 Route::get('sendSMS',function (){
     return view ("SendSms");
 });
 
-
 // Controller para enviar sms
 Route::post('send', '\App\Http\Controllers\SmsController@Send');
+
+Route::post('sendBriefing', '\App\Http\Controllers\SentlistController@Briefing');
+Route::post('sendbriefing', '\App\Http\Controllers\SentlistController@Briefing');
 // Controller para receber SMS (TWILIO OU VONAGE)
 Route::post('sms', '\App\Http\Controllers\SmsController@recive');
+// Controller para receber status da SMS (TWILIO OU VONAGE)
+Route::post('tete', '\App\Http\Controllers\SmsController@status');
 // Controller para telemóvel.
 Route::post('addphone', '\App\Http\Controllers\PhoneController@add');
+
 //Delete phone
 Route::get('delphone/{id}','\App\Http\Controllers\PhoneController@delete');
+//teste
+Route::post('addlist', '\App\Http\Controllers\SmsController@lista');
+Route::post('sendtolist', '\App\Http\Controllers\SentlistController@sendtoolist');
 
 
 

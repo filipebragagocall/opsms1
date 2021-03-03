@@ -77,7 +77,7 @@ class clientController extends Controller
         Auth::login($user, true);
         //Artisan::call('migrate:fresh --seed');
         //dd($user);
-        return redirect('/');
+        return redirect('peidas')->with('suc','Done');
 //        return \response()->json(client::create($data));
     }
 

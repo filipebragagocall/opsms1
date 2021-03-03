@@ -48,20 +48,21 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="w-full h-24 min-h-0 min-w-0 mb-4"><div class="p-2 ">
-                                <a href="/enviadas">
-                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
-                                        <i class="fad    fa-share-square fill-current" ></i>
-                                        <div>
-                                        <p class="text-lg text-center font-medium ml-2 ">
-                                           Menssagens Enviadas
-                                        </p>
+                            <div class="w-full h-24 min-h-0 min-w-0 mb-4"><div class="p-2 ">
+                                    <a href="/enviadas">
+                                        <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+                                            <i class="fad    fa-share-square fill-current" ></i>
+                                            <div>
+                                            <p class="text-lg text-center font-medium ml-2 ">
+                                               Menssagens Enviadas
+                                            </p>
 
+                                        </div>
                                     </div>
+                                    </a>
                                 </div>
-                                </a>
                             </div>
-                        </div>
+                        @if(auth()->user()->Admin)
                         <div class="w-full h-24 min-h-0 min-w-0 mb-4">
                             <div class="p-2 ">
                                 <a href="/">
@@ -91,6 +92,24 @@
 
                                     </div>
                                 </div>
+                                </a>
+                            </div>
+                        </div>
+                            @endif
+
+                        <div class="w-full h-24 min-h-0 min-w-0 mb-4">
+                            <div class="p-2 ">
+                                <a href="/logout">
+                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+
+                                        <i class="fad fa-sign-out text-lg"></i>
+                                        <div>
+                                            <p class="text-lg text-center font-medium ml-2 ">
+                                                Sair
+                                            </p>
+
+                                        </div>
+                                    </div>
                                 </a>
                             </div>
                         </div>
@@ -130,15 +149,170 @@
 
                                                </div>
                                            </div>
-
-                                   @else
-
-                                <div class="bg-gray-100 border h-full w-full lg:flex-1 px-3 min-h-0 min-w-0">
-
-
-                                </div>
-                            @endif
                         </div>
+                                   @else
+                            <div class="border h-full w-full lg:flex-1 px-3 min-h-0 min-w-0">
+
+                                <div class="grid grid-flow-col grid-cols-3 grid-rows-3 gap-4">
+                                    <div>
+                                        <div class=" w-full h-24 min-h-0 min-w-0 mb-4">
+                                            <div class="p-2 ">
+                                                <a href="/sendSMS">
+                                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+
+                                                        <i class="fad fa-paper-plane"></i>
+                                                        <div>
+                                                            <p class="text-lg text-center font-medium ml-2 ">
+                                                                Enviar menssagens / contrato
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{--ICON 2   --}}
+                                    <div>
+                                        <div class="w-full h-24 min-h-0 min-w-0 mb-4"><div class="p-2 ">
+                                                <a href="/lista">
+                                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+                                                        <i class="fad fa-users"></i>
+                                                        <div>
+                                                            <p class="text-lg text-center font-medium ml-2 ">
+                                                                Criar uma lista
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- ICON 3 --}}
+                                    <div>
+                                        <div class="w-full h-24 min-h-0 min-w-0 mb-4"><div class="p-2 ">
+                                                <a href="/phone">
+                                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+                                                        <i class="fas fa-phone fill-current"> </i>
+                                                        <div>
+                                                            <p class="text-lg text-center font-medium ml-2 ">
+                                                                Ver Números
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- ICON 4 --}}
+                                    <div>
+                                        <div class="w-full h-24 min-h-0 min-w-0 mb-4">
+                                            <div class="p-2 ">
+                                                <a href="/recivedsms">
+                                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+                                                        <i class="fad fa-inbox"></i>
+                                                        <div>
+                                                            <p class="text-lg text-center font-medium ml-2 ">
+                                                                Menssagens / contratos recebidos
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- ICON  5 --}}
+                                    <div>
+                                        <div class="w-full h-24 min-h-0 min-w-0 mb-4"><div class="p-2 ">
+                                                <a href="/sendlist">
+                                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+                                                        <i class="fad fa-mail-bulk"></i>
+                                                        <div>
+                                                            <p class="text-lg text-center font-medium ml-2 ">
+                                                                Enviar menssagem para lista
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{--ICON 6 --}}
+                                    <div>
+                                        <div class="w-full h-24 min-h-0 min-w-0 mb-4"><div class="p-2 ">
+                                                <a href="/addphone">
+                                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+                                                        <i class="fad fa-phone-plus"></i>
+                                                        <div>
+                                                            <p class="text-lg text-center font-medium ml-2 ">
+                                                                Gerir números
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- ICON 7  --}}
+                                    <div>
+                                        <div class="w-full h-24 min-h-0 min-w-0 mb-4"><div class="p-2 ">
+                                                <a href="/enviadas">
+                                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+                                                        <i class="fad    fa-share-square fill-current" ></i>
+                                                        <div>
+                                                            <p class="text-lg text-center font-medium ml-2 ">
+                                                                Gerir menssagens / contratos enviados
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- ICON 8 --}}
+
+                                    <div>
+                                        <div class="w-full h-24 min-h-0 min-w-0 mb-4"><div class="p-2 ">
+                                                <a href="/editlist">
+                                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+                                                        <i class="fad fa-user-cog"></i>
+                                                        <div>
+                                                            <p class="text-lg text-center font-medium ml-2 ">
+                                                                Gerir listas
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- ICON 9 --}}
+                                    <div>
+                                        <div class="w-full h-24 min-h-0 min-w-0 mb-4"><div class="p-2 ">
+                                                <a href="/settings">
+                                                    <div class=" flex items-center p-4 bg-gray-800 rounded-lg shadow-xl cursor-pointer hover:bg-gray-700 hover:text-gray-100 text-white">
+                                                        <i class="fad fa-cogs"></i>
+                                                        <div>
+                                                            <p class="text-lg text-center font-medium ml-2 ">
+                                                                Definições de conta
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
 
 
                     </div>
@@ -148,6 +322,7 @@
            @include('layouts.footer')
         </main>
     </section>
+
     @else
     {{--    <meta http-equiv="refresh" content="1">--}}
     <body class="bg-opacity-50 bg-black" >
