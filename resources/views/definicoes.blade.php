@@ -22,36 +22,114 @@
                                 <div class="container mx-auto">
                                     <div class="inputs w-full max-w-2xl p-6 mx-auto">
                                         <h2 class="text-2xl text-gray-900">Definicções de conta</h2>
-                                        <form class=" border-t border-gray-400 pt-4">
+                                        <form class=" border-t border-gray-400 pt-4" method="post" action="change">
                                             <div class='flex flex-wrap -mx-3 mb-6'>
+
                                                 <div class='w-full md:w-full px-3 mb-6'>
-                                                    <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' for='grid-text-1'>Email</label>
-                                                    <input class='appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500' id='grid-text-1' value="{{auth()->user()->email}}" type='text' placeholder='{{auth()->user()->email}}'  required>
+                                                    <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' for='Email'>Email</label>
+                                                    <input class='appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500' id='Email' name="Email" value="{{auth()->user()->email}}" type='text' placeholder='{{auth()->user()->email}}'  required>
                                                 </div>
-                                                <div class='w-full md:w-full px-3 mb-6 '>
+                                                <div class='w-full md:w-full px-3 '>
                                                     <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>password</label>
-                                                    <button class="appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md ">change your password</button>
                                                 </div>
-                                                <div class='w-full md:w-full px-3 mb-6'>
-                                                    <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' for='grid-text-1'>Email</label>
-                                                    <input class='appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500' id='grid-text-1' value="{{auth()->user()->email}}" type='text' placeholder='{{auth()->user()->email}}'  required>
-                                                </div>
-                                                <div class='w-full md:w-full px-3 mb-6'>
-                                                    <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>fav language</label>
-                                                    <div class="flex-shrink w-full inline-block relative">
-                                                        <select class="block appearance-none text-gray-600 w-full bg-white border border-gray-400 shadow-inner px-4 py-2 pr-8 rounded">
-                                                            <option>choose ...</option>
-                                                            <option>English</option>
-                                                            <option>France</option>
-                                                            <option>Spanish</option>
-                                                        </select>
-                                                        <div class="pointer-events-none absolute top-0 mt-3  right-0 flex items-center px-2 text-gray-600">
-                                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                                        </div>
+                                                <div class="flex items-center justify-center h-24">
+                                                    <div class="ml-3 inline-flex items-center text-indigo-100 transition-colors duration-150 bg-red-500 rounded-lg focus:shadow-outline hover:bg-red-800 modal-button bg-teal-200 p-3 rounded-lg text-teal-900 hover:bg-teal-300">
+                                                        <span>Alterar a password</span>
+                                                        <i class="ml-2 fad fa-edit"></i>
                                                     </div>
                                                 </div>
+                                                <div class="modal opacity-0 pointer-events-none absolute w-full h-full top-0 left-0 flex items-center justify-center">
+                                                    <div class="modal-overlay absolute w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
+                                                    <div class="absolute w-1/2 h-32 bg-white rounded-sm shadow-lg flex items-center justify-center text-2xl">
+
+                                                        <div class='w-full md:w-full px-3 mb-6'>
+                                                            <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' for='oldpassword'>Confirmar password atual</label>
+                                                            <input class='appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500' id='oldpassword' type='password' placeholder='password' name="oldpassword">
+                                                        </div>
+                                                        <div class='w-full md:w-full px-3 mb-6'>
+                                                            <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' for='password'>Password Nova</label>
+                                                            <input class='appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500' id='password' type='password' placeholder='password' name="password">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <script>
+                                                    const button = document.querySelector('.modal-button')
+                                                    button.addEventListener('click', toggleModal)
+
+                                                    const overlay = document.querySelector('.modal-overlay')
+                                                    overlay.addEventListener('click', toggleModal)
+
+
+                                                    function toggleModal () {
+                                                        const modal = document.querySelector('.modal')
+                                                        modal.classList.toggle('opacity-0')
+                                                        modal.classList.toggle('pointer-events-none')
+                                                    }
+
+                                                </script>
+
+                                                <div class='w-full md:w-full px-3 mb-6'>
+                                                    <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2' for='phone'>Número de telefone</label>
+                                                    <input class='appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500' id='phone' name="phone" value="{{auth()->user()->phone_number}}" type='text' placeholder='{{auth()->user()->phone_number}}'  required>
+                                                </div>
+                                                @if(session('phem'))
+                                                    <div class='w-full md:w-full px-3 mb-6'>
+                                                        <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bg-green-400 text-center'>Email e telefone alterado</label>
+
+                                                    </div>
+                                                @endif
+                                                @if(session('em'))
+                                                    <div class='w-full md:w-full px-3 mb-6'>
+                                                        <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bg-green-400 text-center'>Email Alterado</label>
+
+                                                    </div>
+                                                @endif
+                                                @if(session('pw'))
+                                                    <div class='w-full md:w-full px-3 mb-6'>
+                                                        <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bg-green-400 text-center'>Password Alterada</label>
+
+                                                    </div>
+                                                @endif
+                                                @if(session('ph'))
+                                                    <div class='w-full md:w-full px-3 mb-6'>
+                                                        <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bg-green-400 text-center'>Número de telefone alterado</label>
+
+                                                    </div>
+                                                @endif
+                                                @if(session('Sucesso'))
+                                                    <div class='w-full md:w-full px-3 mb-6'>
+                                                        <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bg-green-400 text-center'>Pasword, Email e telefone alterado</label>
+
+                                                    </div>
+                                                @endif
+                                                @if(session('pwem'))
+                                                    <div class='w-full md:w-full px-3 mb-6'>
+                                                        <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bg-green-400 text-center'>Password e Email alterado</label>
+
+                                                    </div>
+                                                @endif
+                                                @if(session('pwph'))
+                                                    <div class='w-full md:w-full px-3 mb-6'>
+                                                        <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bg-green-400 text-center'>Password e telefone alterado</label>
+
+                                                    </div>
+                                                @endif
+                                                @if(session('Error'))
+                                                    <div class='w-full md:w-full px-3 mb-6'>
+                                                        <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bg-red-400 text-center'>Password não corresponde</label>
+
+                                                    </div>
+                                                @endif
+                                                @if(session('Erro'))
+                                                    <div class='w-full md:w-full px-3 mb-6'>
+                                                        <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bg-red-400 text-center'>Erro na alteração dos dados</label>
+
+                                                    </div>
+                                                @endif
                                                     <div class="flex justify-end">
-                                                        <button class="appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md mr-3" type="submit">save changes</button>
+                                                        <button class="ml-3 appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md mr-3" type="submit">save changes</button>
                                                     </div>
                                                 </div>
                                             </div>

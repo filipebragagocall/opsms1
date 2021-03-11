@@ -152,7 +152,6 @@
                         </div>
                                    @else
                             <div class="border h-full w-full lg:flex-1 px-3 min-h-0 min-w-0">
-
                                 <div class="grid grid-flow-col grid-cols-3 grid-rows-3 gap-4">
                                     <div>
                                         <div class=" w-full h-24 min-h-0 min-w-0 mb-4">

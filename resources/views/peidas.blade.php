@@ -1,19 +1,18 @@
 <meta charset="UTF-8" />
-<title> Peida </title>
+<title> GoSms </title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 @if(!session('suc'))
 <body class="bg-opacity-30 2xl bg-gradient-to-br from-gray-300">
 <div class="w-96 m-auto shadow-2xl bg-white border-4 rounded p-5 mt-40 ">
-<header class="justify-center flex text-center 2xl:content-center">
-    <img class="object-contain h-14 w-14 mt-4 self-center" src="https://cdn3.iconfinder.com/data/icons/fitness-and-health-7/48/56-512.png"
-         alt="open-source" />
+<header class="justify-center flex">
+    <img src=" {{asset('image/GoSms.svg')}}">
 </header>
 
 <form action="login" method="post">
     @csrf
     <div>
-        <input autocomplete="off" placeholder="Utilizador" class="w-full p-2 mt-20 mb-3 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="text" name="username">
+        <input autocomplete="off" placeholder="Utilizador" class="w-full p-2 mt-14 mb-3 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="text" name="username">
     </div>
     <div>
         <input autocomplete="off" placeholder="Password" class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="password" name="password">
@@ -22,9 +21,8 @@
     @if (session('error'))
         <div class="text-red-700 mb-6 bg-red-300 rounded h-10 mt-3 text-center"><p class="p-1">{{ session('error') }}!</p></div>
     @endif
-    <div class="w-full mt-3">
-        <input class="ml-7 mr-5 ml-16 w-auto bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-3 rounded" type="submit" value="Login">
-        <a href="register"><input class="ml-4 mr-5 w-auto bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-3 rounded" type="button" value="Registar"></a>
+    <div class="w-full mt-3 flex content-center self-center justify-center">
+        <input class=" w-auto bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-3 rounded" type="submit" value="Login">
     </div>
     </div>
 </form>

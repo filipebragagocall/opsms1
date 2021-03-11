@@ -17,7 +17,7 @@ class listaController extends Controller
         ]);
         $t="";
         $message= $data["message"];
-        $regex='/^9[12356]\d{6}[0-9]$/';
+        $regex='/^[92][12356789]\d{6}[0-9]$/';
         $myArray = explode(',', $message);
 
         foreach ($myArray as $item){
@@ -39,6 +39,7 @@ class listaController extends Controller
                         }else
                             $t = $t ."," . $tes;
                     }else{
+                        dd($t);
                         return redirect('/lista')->with('err','Erro, Não corresponde ao formato correto');
                     }
                 }
@@ -58,7 +59,7 @@ class listaController extends Controller
             return redirect('editlist')->with('suc','yes');
         }else if ($id->user_id === Auth::user()->id){
             listas::where('id',$id->id)->delete();
-            return redirect('editlist')->with('suc','yes');;
+            return redirect('editlist')->with('suc','yes');
         }else
             return redirect('editlist');
     }
@@ -125,10 +126,10 @@ class listaController extends Controller
 
             $list = listas::whereHas("user", function ($query) {
                 return $query->where("id", auth()->user()->id);
-            })->paginate(5);
+            })->paginate(8);
         } else
         {
-            $list = listas::paginate(5);
+            $list = listas::paginate(8);
         }
         return view('editlist')->with('lista', $list);
     }

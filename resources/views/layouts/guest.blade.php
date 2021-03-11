@@ -52,7 +52,7 @@
   transition duration-150 ease-in-out origin-top min-w-32"
         >
             @if(auth()->user()->Admin)
-                <li class="px-3 py-1 hover:bg-gray-100"><a href="Mynumbers">Admin</a></li>
+                <li class="px-3 py-1 hover:bg-gray-100"><a href="Admin">Admin</a></li>
             @endif
             <li class="rounded-sm px-3 py-1 hover:bg-gray-100"><a href="settings">Definições de conta</a></li>
             <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
@@ -106,8 +106,8 @@
       min-w-32
       "
                         >
-                            <li class="px-3 py-1 hover:bg-gray-100"><a href="Mynumbers">Enviados</a></li>
-                            <li class="px-3 py-1 hover:bg-gray-100">Recebidos</li>
+                            <li class="px-3 py-1 hover:bg-gray-100"><a href="sendSMS">Enviados</a></li>
+                            <li class="px-3 py-1 hover:bg-gray-100">><a href="recivedsms">Recebidos</a></li>
                         </ul>
                     </li>
                       @if(auth()->user()->Admin)

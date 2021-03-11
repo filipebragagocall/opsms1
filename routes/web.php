@@ -22,7 +22,7 @@ require __DIR__ . '/auth.php';
 // Página Inicial caso estiver Logaddo , Caso não então pede login
 Route::get('/', function () {
     if (auth()->guest()){
-
+Artisan::call("queue:listen");
         return redirect("/peidas");
 
     }elseif(auth()->user()->username !== "Briefing" && auth()->user()->email !=="Briefing@gocall.pt" ){
@@ -77,6 +77,9 @@ Route::get('briefing', function (){
 });
 Route::get('lista', function (){
     return view('list');
+});
+Route::get('Admin', function (){
+    return view('Register');
 });
 
 Route::get('sendlist', function (){
@@ -138,10 +141,15 @@ Route::post('addphone', '\App\Http\Controllers\PhoneController@add');
 //Delete phone
 Route::get('delphone/{id}','\App\Http\Controllers\PhoneController@delete');
 //teste
-Route::post('addlist', '\App\Http\Controllers\SmsController@lista');
+Route::post('addlist', '\App\Http\Controllers\ListaController@lista');
+
+Route::post('change', '\App\Http\Controllers\ClientController@change');
+
 Route::post('sendtolist', '\App\Http\Controllers\SentlistController@sendtoolist');
 
+Route::get('statuslist', '\App\Http\Controllers\SentlistController@seestatus');
 
+Route::get("test", '\App\Http\Controllers\SentlistController@Test');
 
 
 //Route::post('recivedsms/{mi}','\App\Http\Controllers\SmsController@messageid');

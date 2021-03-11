@@ -15,10 +15,10 @@
                         <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Nome da lista
+                                Para
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Contactos
+                                Estado
                             </th>
 
                             <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 uppercase tracking-wider flex items-end ">
@@ -45,7 +45,7 @@
                                     <div class="flex items-center">
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
-                                                <b>{{$testes->name}}</b>
+                                                <b>{{$testes->To}}</b>
                                             </div>
 
                                         </div>
@@ -53,12 +53,11 @@
                                 </td>
 
                                 <td class="px-6 py-4  whitespace-nowrap text-sm text-gray-500">
-                                    <b>{{$testes->numbers[0]}}{{$testes->numbers[1]}}{{$testes->numbers[2]}}{{$testes->numbers[3]}}{{$testes->numbers[4]}}{{$testes->numbers[5]}}{{$testes->numbers[6]}}...</b>
+                                    <b>{{$testes->State}}</b>
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                    <i class="fad fa-edit"></i>
-                                    <a href="/editlist/{{$testes->id}}" class="text-indigo-600 hover:text-indigo-900 ">editar</a>
+                                    Porta: {{$testes->Port}}
                                 </td>
                             </tr>
                         @endforeach

@@ -18,13 +18,48 @@
                             <div class="border pb-2 lg:pb-0 w-full lg:max-w-sm px-3 flex flex-row lg:flex-col flex-wrap lg:flex-nowrap">
 
                                 <!-- control content left -->
-                                <div class="w-full h-24 min-h-0 min-w-0 rounded-2xl"> <table class=" rounded-2xl min-w-full divide-y divide-gray-200">
+                                <div class="w-full h-24 min-h-0 min-w-0 rounded-2xl">
+                                    <table class=" rounded-2xl min-w-full divide-y divide-gray-200">
                                         <thead class="bg-gray-50">
                                         <tr>
-                                            <th scope="col" class="rounded-lg rounded-b-none px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                <b>Para:</b>
+                                            <th scope="col" class=" rounded-lg rounded-b-none px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <b>DE:</b>
                                             </th>
 
+                                        </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-100">
+                                        <tr>
+                                            <td class="px-6 py-4  bg-gray-100 rounded-lg rounded-t-none">
+                                                <div class="flex items-center">
+                                                    <div class="w-full">
+                                                        <div class="text-sm font-medium text-gray-900 w-full">
+                                                            {{--                                                    <b>{{$dados['id']}}</b>--}}
+                                                            <div class="relative text-gray-600 w-full">
+
+                                                                <select name="Porta" id="Porta" class="rounded-full w-5/6">
+                                                                    <option data-Grupo="1" value="1">Iberdrola</option>
+                                                                    <option data-Grupo="2" value="2">OPTMODE</option>
+                                                                    <option data-Grupo="3" value="3">OUTRA</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="mt-8 rounded-2xl min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class=" rounded-lg rounded-b-none px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <b>Para:</b>
+                                            </th>
 
                                         </tr>
                                         </thead>
@@ -43,11 +78,13 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-                                                        </div>
 
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                             </td>
+
 
                                         </tr>
                                         </tbody>

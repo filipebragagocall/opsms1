@@ -62,8 +62,6 @@ class clientController extends Controller
      */
     public function create(Request $request)
     {
-
-
         $data = $request->validate([
             'password' => 'required',
             'username' => 'required',
@@ -77,7 +75,7 @@ class clientController extends Controller
         Auth::login($user, true);
         //Artisan::call('migrate:fresh --seed');
         //dd($user);
-        return redirect('peidas')->with('suc','Done');
+        return redirect('Welcome')->with('suc','Done');
 //        return \response()->json(client::create($data));
     }
 
@@ -145,5 +143,72 @@ class clientController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+    public function change (Request $request){
+        $data=$request->validate([
+            'Email' => 'required',
+            'phone' => 'required'
+        ]);
+        $email = Auth::user()->email;
+        $phone = Auth::user()->phone_number;
+        if ($request->password === null){
+            if ($email !== $data["Email"] && $phone !== $data["phone"] ){
+                User::where('id',Auth::user()->id)
+                    ->update([
+                        'email' => $data["Email"],
+                        'phone_number' => $data["phone"]
+                    ]);
+                return redirect('/settings')->with('phem','Phone number and email changed'); //
+            }elseif ($email !== $data["Email"]){
+                User::where('id',Auth::user()->id)
+                    ->update([
+                        'email' => $data["Email"]
+                    ]);
+                return redirect('/settings')->with('em','Email changed'); //
+            }elseif ($phone !== $data["phone"]){
+                User::where('id',Auth::user()->id)
+                    ->update([
+                        'password' => $data["password"],
+                        'phone_number' => $data["phone"]
+                    ]);
+                return redirect('/settings')->with('ph','Phone changed');
+            }
+        }else{
+            $data["password"] = $request->password;
+
+        if (Hash::check($request->oldpassword, Auth::user()->password)){
+            if ($email !== $data["Email"] && $phone !== $data["phone"] ){
+                User::where('id',Auth::user()->id)
+                    ->update([
+                        'password' => $data["password"],
+                        'email' => $data["Email"],
+                        'phone_number' => $data["phone"]
+                        ]);
+                return redirect('/settings')->with('Sucesso','All changed');
+            }elseif ($email !== $data["Email"]){
+                User::where('id',Auth::user()->id)
+                    ->update([
+                        'password' => $data["password"],
+                        'email' => $data["Email"]
+                    ]);
+                return redirect('/settings')->with('pwem','Password and Email changed');
+            }elseif ($phone !== $data["phone"]){
+                User::where('id',Auth::user()->id)
+                    ->update([
+                        'password' => $data["password"],
+                        'phone_number' => $data["phone"]
+                    ]);
+                return redirect('/settings')->with('pwph','Password and phone Number changed');
+            }else{
+                $data["password"] = Hash::make($data["password"]);
+                User::where('id',Auth::user()->id)
+                    ->update(['password' => $data["password"]]);
+                return redirect('/settings')->with('pw','Password changed');
+            }
+        }else{
+            return redirect('/settings')->with('Error','Password dindt match changed');
+        }
+        return redirect('/settings')->with('Erro','something went wrong');
+        }
     }
 }

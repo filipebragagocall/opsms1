@@ -6,8 +6,7 @@
     <ul class="text-center flex flex-row sm:flex-col w-full">
         <li class="h-14 border-b border-gray-900 hidden sm:block">
             <a id="page-icon" href="/" class="h-full w-full hover:bg-gray-700 block p-3">
-                    <img class="object-contain h-full lg:w-full" src="https://cdn3.iconfinder.com/data/icons/fitness-and-health-7/48/56-512.png"
-                     alt="open-source" />
+               <img src=" {{asset('image/GoSms.svg')}}">
             </a>
         </li>
 
@@ -36,6 +35,11 @@
             <li class="sm:border-b border-gray-900 flex-1 sm:w-full" title="Enviar menssagem para a lista">
                 <a id="page-icon" href="/sendlist" class="h-full  w-full hover:bg-gray-700 block p-3">
                     <i class="fad fa-mail-bulk"></i>
+                </a>
+            </li>
+            <li class="sm:border-b border-gray-900 flex-1 sm:w-full" title="Status das menssagens enviadas">
+                <a id="page-icon" href="/statuslist" class="h-full  w-full hover:bg-gray-700 block p-3">
+                    <i class="fad fa-info-circle"></i>
                 </a>
             </li>
             <li class="sm:border-b border-gray-900 flex-1 sm:w-full" title="Gerir Listas">

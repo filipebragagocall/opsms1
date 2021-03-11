@@ -10,6 +10,9 @@ class sentlist extends Model
     use HasFactory;
     protected $fillable = [
         'Body',
+        "State",
+        "Port",
+        "request_id",
         'To',
         'list_id',
         'user_id',

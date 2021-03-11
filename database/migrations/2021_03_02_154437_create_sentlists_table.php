@@ -17,6 +17,9 @@ class CreateSentlistsTable extends Migration
             $table->id();
             $table->string('Body');
             $table->string('To');
+            $table->integer("Port");
+            $table->enum("State", ["Sending", "Success", "Error"]);
+            $table->foreignId("request_id")->references("id")->on("requests");
             $table->foreignId('list_id')->references('id')->on('listas');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
